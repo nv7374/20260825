@@ -50,5 +50,18 @@ namespace BETA7
                 bullet.GetComponent<Bullet>().SetBullet(BulletPoint.position + Vector3.forward);
             }
         }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Bullet"))
+            {
+                return;
+            }
+            if (other.CompareTag("Enemy"))
+            {
+                Destroy(other.gameObject);
+                Destroy(gameObject);
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace BETA7
 {
@@ -26,7 +27,7 @@ namespace BETA7
         void Start()
         {
             gameStatus = GameStatus.play;
-            StartCoroutine
+            StartCoroutine(SpawnEnemy());
         }
 
         IEnumerator SpawnEnemy()
@@ -36,11 +37,10 @@ namespace BETA7
             {
                 for(int i=0; i < enemyCount; i++)
                 {
-                    GameObject enemy =
-                        Enemys[Random.Range(0, Enemys.Length)];
+                    GameObject enemy = Enemy[Random.Range(0, Enemy.Length)];
                     Vector3 spawnPosition = new Vector3(Random.Range(-spawnValue.x, spawnValue.x), spawnValue.y, spawnValue.z);
-                    Quaternion spawnRotation = Quaternion.identity;
-                    listEnemys.Add(Instantiate(enemy, spawnPosition, spawnRotation));
+                    
+                    listEnemys.Add(Instantiate(enemy, spawnPosition, enemy.transform.rotation));
                     yield return new WaitForSeconds(spawnWait);
                 }
             }

@@ -18,22 +18,28 @@ namespace BETA7
 
         void Start()
         {
-            this.GetComponent<Rigidbody>().linearVelocity = transform.forward * speed;
+            Player = GameObject.FindGameObjectWithTag("Player");
+            if(Player == null )
+            {
+                Debug.Log("Player Not Found");
+            }
             InvokeRepeating("fireBullet", delay, fireRate);
         }
 
         // Update is called once per frame
         void Update()
         {
-            fireBullet();
+            
+            Move();
         }
 
         void fireBullet()
         {
             if (Player != null)
             {
-                GameObject bullet = Instantiate(
-                    objBullet, BulletPoint.transform.position, this.transform.rotation);
+                GameObject bullet = Instantiate(objBullet, BulletPoint.transform.position, this.transform.rotation);
+                Bullet bulletScript = bullet.GetComponent<Bullet>();
+                bullet.GetComponent<Bullet>().isPlayer = false;
                 bullet.GetComponent<Bullet>().SetBullet(Player.transform.position);
             }
         }
@@ -42,7 +48,11 @@ namespace BETA7
         {
             if(Player != null)
             {
-                thisRigi.linearVelocity = (Player.transform.position - transform.position).normalized * speed;
+                transform.position = Vector3.MoveTowards(
+                    transform.position,
+                    Player.transform.position,
+                    speed * Time.deltaTime
+                );
             }
         }
     }

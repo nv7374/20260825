@@ -129,3 +129,4 @@ MonoBehaviour:
   speed: 1
   dir: {x: 0, y: 0, z: 0}
   isPlayer: 1
+  Item: {fileID: 4634322931775870330, guid: 5062a0b059f901449bef6884a7e1b9d7, type: 3}

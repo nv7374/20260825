@@ -23,7 +23,7 @@ namespace BETA7
         void Update()
         {
             this.transform.position = new Vector3(
-                this.transform.position.x, this.transform.position.y, this.transform.position.z + Time.deltaTime * itemSpeed);
+                this.transform.position.x, this.transform.position.y + Time.deltaTime * itemSpeed, this.transform.position.z);
         }
     }
 }
